@@ -8,13 +8,13 @@ export default function FloatingContact() {
     <Link
       to="/contact"
       className="floating-contact"
-      aria-label={isZh ? '联系咨询' : 'Contact Sales'}
-      title={isZh ? '联系咨询' : 'Contact Sales'}
+      aria-label={isZh ? '联系咨询' : 'Contact Us'}
+      title={isZh ? '联系咨询' : 'Contact Us'}
     >
       <span className="floating-contact-icon" aria-hidden="true">
-        ↗
+        🤝
       </span>
-      <span className="floating-contact-label">{isZh ? '联系咨询' : 'CONTACT'}</span>
+      <span className="floating-contact-label">{isZh ? '联系咨询' : 'Contact Us'}</span>
     </Link>
   );
 }
