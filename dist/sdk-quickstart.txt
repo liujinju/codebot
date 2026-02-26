@@ -1,0 +1,17 @@
+# EI SDK Quickstart
+# 下载于 Embodied Intelligence Platform 示例站点
+
+import { Robot } from '@ei/sdk';
+
+async function bootstrap() {
+  const robot = new Robot({ endpoint: 'wss://api.ei-os.ai' });
+
+  await robot.perception.enable(['vision', 'audio', 'touch']);
+  await robot.task.run('line_inspection');
+
+  console.log('SDK quickstart task started');
+}
+
+bootstrap().catch((error) => {
+  console.error('Failed to start quickstart:', error);
+});

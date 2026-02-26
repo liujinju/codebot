@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { navItems } from '../data/siteData';
+import { localize, navItems } from '../data/siteData';
+import { useLocale } from '../contexts/LocaleContext';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   const location = useLocation();
+  const { locale, isZh, toggleLocale } = useLocale();
 
   useEffect(() => {
     setOpen(false);
@@ -42,8 +44,9 @@ export default function Navbar() {
         </Link>
 
         <button
+          type="button"
           className="menu-toggle"
-          aria-label="Toggle navigation"
+          aria-label={isZh ? '切换导航菜单' : 'Toggle navigation menu'}
           aria-expanded={open}
           aria-controls="primary-navigation"
           onClick={() => setOpen((prev) => !prev)}
@@ -54,22 +57,31 @@ export default function Navbar() {
         <nav id="primary-navigation" className={`nav-links ${open ? 'open' : ''}`}>
           {navItems.map((item) => (
             <NavLink
-              key={item.label}
+              key={item.to}
               to={item.to}
               className={({ isActive }) => (isActive ? 'active' : '')}
               onClick={() => setOpen(false)}
             >
-              {item.label}
+              {localize(item.label, locale)}
             </NavLink>
           ))}
         </nav>
 
         <div className="nav-auth">
+          <button
+            type="button"
+            className="lang-toggle"
+            onClick={toggleLocale}
+            aria-label={isZh ? '切换到英文' : 'Switch to Chinese'}
+            title={isZh ? 'Switch to English' : '切换到中文'}
+          >
+            {isZh ? 'EN' : '中文'}
+          </button>
           <Link to="/auth/login" className="ghost-btn">
-            登录
+            {isZh ? '登录' : 'Login'}
           </Link>
           <Link to="/auth/register" className="solid-btn">
-            注册
+            {isZh ? '注册' : 'Sign Up'}
           </Link>
         </div>
       </div>

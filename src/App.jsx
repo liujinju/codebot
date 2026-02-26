@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
+import { useLocale } from './contexts/LocaleContext';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
@@ -18,9 +19,11 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function RouteLoading() {
+  const { isZh } = useLocale();
+
   return (
     <section className="page-shell route-fallback" role="status" aria-live="polite">
-      <p>页面加载中...</p>
+      <p>{isZh ? '页面加载中...' : 'Loading page...'}</p>
     </section>
   );
 }

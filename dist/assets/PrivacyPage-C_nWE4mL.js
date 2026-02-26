@@ -1,1 +1,0 @@
-import{j as e}from"./index-Cm10H3I7.js";function a(){return e.jsx("section",{className:"page-shell",children:e.jsxs("article",{className:"detail-block","data-reveal":!0,children:[e.jsx("p",{className:"eyebrow",children:"Policy"}),e.jsx("h1",{children:"隐私政策"}),e.jsx("p",{children:"我们仅在提供服务所需范围内收集数据，并对敏感信息进行分级保护、访问控制与审计追踪。"})]})})}export{a as default};

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLocale } from '../contexts/LocaleContext';
 
 export default function AuthPage({ mode }) {
   const isLogin = mode === 'login';
   const [message, setMessage] = useState('');
+  const { isZh } = useLocale();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,7 +16,15 @@ export default function AuthPage({ mode }) {
       return;
     }
 
-    setMessage(isLogin ? '登录请求已提交（演示环境）。' : '注册请求已提交（演示环境）。');
+    setMessage(
+      isLogin
+        ? isZh
+          ? '登录请求已提交（演示环境）。'
+          : 'Login request submitted (demo environment).'
+        : isZh
+          ? '注册请求已提交（演示环境）。'
+          : 'Signup request submitted (demo environment).'
+    );
     form.reset();
   };
 
@@ -22,24 +32,32 @@ export default function AuthPage({ mode }) {
     <section className="page-shell auth-shell">
       <article className="auth-card" data-reveal>
         <p className="eyebrow">Account</p>
-        <h1>{isLogin ? '登录' : '注册'}</h1>
-        <p>{isLogin ? '登录后访问开发者资源与平台控制台。' : '创建账号以下载 SDK 和加入开发者社区。'}</p>
+        <h1>{isLogin ? (isZh ? '登录' : 'Login') : isZh ? '注册' : 'Sign Up'}</h1>
+        <p>
+          {isLogin
+            ? isZh
+              ? '登录后访问开发者资源与平台控制台。'
+              : 'Log in to access developer resources and the platform console.'
+            : isZh
+              ? '创建账号以下载 SDK 和加入开发者社区。'
+              : 'Create an account to download the SDK and join the developer community.'}
+        </p>
 
         <form className="auth-form" onSubmit={handleSubmit} noValidate>
           {!isLogin ? (
             <label className="form-field" htmlFor="auth-name">
-              <span>姓名</span>
+              <span>{isZh ? '姓名' : 'Name'}</span>
               <input id="auth-name" name="name" type="text" autoComplete="name" required />
             </label>
           ) : null}
 
           <label className="form-field" htmlFor="auth-email">
-            <span>邮箱</span>
+            <span>{isZh ? '邮箱' : 'Email'}</span>
             <input id="auth-email" name="email" type="email" autoComplete="email" required />
           </label>
 
           <label className="form-field" htmlFor="auth-password">
-            <span>密码</span>
+            <span>{isZh ? '密码' : 'Password'}</span>
             <input
               id="auth-password"
               name="password"
@@ -50,10 +68,10 @@ export default function AuthPage({ mode }) {
             />
           </label>
 
-          <p className="form-hint">密码至少 8 位。</p>
+          <p className="form-hint">{isZh ? '密码至少 8 位。' : 'Password must be at least 8 characters.'}</p>
 
           <button type="submit" className="solid-btn lg">
-            {isLogin ? '登录' : '创建账号'}
+            {isLogin ? (isZh ? '登录' : 'Login') : isZh ? '创建账号' : 'Create Account'}
           </button>
         </form>
 
@@ -64,9 +82,9 @@ export default function AuthPage({ mode }) {
         ) : null}
 
         <p className="auth-switch">
-          {isLogin ? '还没有账号？' : '已经有账号？'}
+          {isLogin ? (isZh ? '还没有账号？' : "Don't have an account?") : isZh ? '已经有账号？' : 'Already have an account?'}
           <Link to={isLogin ? '/auth/register' : '/auth/login'}>
-            {isLogin ? '去注册' : '去登录'}
+            {isLogin ? (isZh ? '去注册' : 'Sign Up') : isZh ? '去登录' : 'Login'}
           </Link>
         </p>
       </article>

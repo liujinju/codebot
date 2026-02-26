@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import SectionHeader from './SectionHeader';
-import { productSlides } from '../data/siteData';
+import { localize, productSlides } from '../data/siteData';
+import { useLocale } from '../contexts/LocaleContext';
 
 export default function ProductCarousel() {
   const [active, setActive] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const total = productSlides.length;
+  const { locale, isZh } = useLocale();
 
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -45,13 +47,20 @@ export default function ProductCarousel() {
   const goNext = () => setActive((prev) => (prev + 1) % total);
 
   const slide = useMemo(() => productSlides[active], [active]);
+  const slideTitle = localize(slide.title, locale);
+  const slideSubtitle = localize(slide.subtitle, locale);
+  const slideSpecs = localize(slide.specs, locale);
 
   return (
     <section id="products" className="section products">
       <SectionHeader
         eyebrow="Products"
-        title="关键具身智能产品矩阵"
-        subtitle="以产品化组件方式构建可扩展机器人平台。"
+        title={isZh ? '关键具身智能产品矩阵' : 'Core Embodied Product Portfolio'}
+        subtitle={
+          isZh
+            ? '以产品化组件方式构建可扩展机器人平台。'
+            : 'Build scalable robot platforms with modular product components.'
+        }
       />
 
       {/* Main visual + details panel, similar to DJI-style product focus section. */}
@@ -59,7 +68,7 @@ export default function ProductCarousel() {
         className="carousel"
         data-reveal
         role="region"
-        aria-label="产品轮播"
+        aria-label={isZh ? '产品轮播' : 'Product carousel'}
         tabIndex={0}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
@@ -75,27 +84,27 @@ export default function ProductCarousel() {
         }}
       >
         <div className="carousel-media">
-          <img src={slide.image} alt={slide.title} loading="lazy" />
+          <img src={slide.image} alt={String(slideTitle)} loading="lazy" />
         </div>
 
         <div className="carousel-panel" aria-live="polite">
           <p className="index-badge">
             {String(active + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
           </p>
-          <h3>{slide.title}</h3>
-          <p>{slide.subtitle}</p>
+          <h3>{slideTitle}</h3>
+          <p>{slideSubtitle}</p>
           <ul>
-            {slide.specs.map((spec) => (
+            {slideSpecs.map((spec) => (
               <li key={spec}>{spec}</li>
             ))}
           </ul>
 
           <div className="carousel-actions">
-            <button type="button" aria-label="上一项产品" onClick={goPrev}>
-              上一项
+            <button type="button" aria-label={isZh ? '上一项产品' : 'Previous product'} onClick={goPrev}>
+              {isZh ? '上一项' : 'Previous'}
             </button>
-            <button type="button" aria-label="下一项产品" onClick={goNext}>
-              下一项
+            <button type="button" aria-label={isZh ? '下一项产品' : 'Next product'} onClick={goNext}>
+              {isZh ? '下一项' : 'Next'}
             </button>
           </div>
         </div>
@@ -103,19 +112,22 @@ export default function ProductCarousel() {
 
       {/* Thumbnail rail allows quick switching to any product module. */}
       <div className="thumb-grid" data-reveal>
-        {productSlides.map((item, idx) => (
-          <button
-            type="button"
-            className={`thumb ${idx === active ? 'active' : ''}`}
-            key={item.title}
-            onClick={() => setActive(idx)}
-            aria-pressed={idx === active}
-            aria-label={`查看 ${item.title}`}
-          >
-            <img src={item.image} alt={item.title} loading="lazy" />
-            <span>{item.title}</span>
-          </button>
-        ))}
+        {productSlides.map((item, idx) => {
+          const itemTitle = localize(item.title, locale);
+          return (
+            <button
+              type="button"
+              className={`thumb ${idx === active ? 'active' : ''}`}
+              key={String(itemTitle)}
+              onClick={() => setActive(idx)}
+              aria-pressed={idx === active}
+              aria-label={isZh ? `查看 ${itemTitle}` : `View ${itemTitle}`}
+            >
+              <img src={item.image} alt={String(itemTitle)} loading="lazy" />
+              <span>{itemTitle}</span>
+            </button>
+          );
+        })}
       </div>
     </section>
   );

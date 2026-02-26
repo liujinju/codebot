@@ -152,18 +152,60 @@ main:focus {
 }
 
 .nav-links a {
-  color: var(--text-muted);
-  transition: color 0.25s ease;
+  position: relative;
+  color: #9db2d3;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(0, 209, 255, 0.85), rgba(0, 132, 255, 0.85));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
 }
 
 .nav-links a.active,
 .nav-links a:hover {
-  color: var(--text-primary);
+  color: #f7fbff;
+  text-shadow: 0 0 14px rgba(0, 209, 255, 0.52);
+}
+
+.nav-links a.active::after,
+.nav-links a:hover::after {
+  transform: scaleX(1);
 }
 
 .nav-auth {
   display: flex;
+  align-items: center;
   gap: 10px;
+}
+
+.lang-toggle {
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: #cfe2ff;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.lang-toggle:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 209, 255, 0.56);
+  color: #f7fbff;
+  background: rgba(0, 209, 255, 0.1);
 }
 
 .menu-toggle {
@@ -211,6 +253,18 @@ main:focus {
 .ghost-btn.lg {
   padding: 12px 24px;
   font-size: 0.95rem;
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.download-btn::before {
+  content: '\2193';
+  font-size: 0.95em;
+  line-height: 1;
 }
 
 .hero {
@@ -262,9 +316,11 @@ main:focus {
 
 .hero h1 {
   margin: 10px 0 18px;
-  max-width: 780px;
-  font-size: clamp(2rem, 5.2vw, 4.6rem);
+  max-width: none;
+  font-size: clamp(1.8rem, 4.6vw, 4.2rem);
   line-height: 1.08;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
 }
 
 .hero p {
@@ -390,10 +446,15 @@ main:focus {
 }
 
 .card-grid,
-.solution-list,
-.support-grid {
+.solution-list {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -453,6 +514,28 @@ main:focus {
   border-radius: var(--radius-md);
   padding: 18px;
   background: rgba(15, 24, 38, 0.78);
+}
+
+.sdk-download-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  background: rgba(11, 17, 28, 0.9);
+  display: grid;
+  gap: 10px;
+}
+
+.sdk-download-card h3 {
+  margin: 0;
+}
+
+.sdk-download-card p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.sdk-download-card .solid-btn {
+  width: fit-content;
 }
 
 .code-block {
@@ -517,13 +600,37 @@ main:focus {
   padding: 36px;
 }
 
-.experience-content h2 {
-  margin: 12px 0;
+.support {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(120deg, rgba(12, 19, 32, 0.92), rgba(7, 13, 23, 0.92));
+  padding: 36px;
+  margin-top: 28px;
+  margin-bottom: 36px;
+}
+
+.support .section-header {
+  margin-bottom: 24px;
+}
+
+.support .section-header .eyebrow {
+  border-color: rgba(0, 209, 255, 0.38);
+  color: #7cecff;
+}
+
+.experience-content .section-header {
+  margin-bottom: 24px;
+  max-width: 720px;
+}
+
+.experience-content .section-header h2 {
+  margin: 10px 0 12px;
   font-size: clamp(1.6rem, 3vw, 2.6rem);
 }
 
-.experience-content p {
-  color: var(--text-muted);
+.experience-content .section-header .eyebrow {
+  border-color: rgba(0, 209, 255, 0.38);
+  color: #7cecff;
 }
 
 .experience-media {
@@ -827,9 +934,12 @@ main:focus {
 
   .thumb-grid,
   .card-grid,
-  .solution-list,
-  .support-grid {
+  .solution-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .support-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .case-grid {
@@ -896,6 +1006,10 @@ main:focus {
     gap: 10px;
   }
 
+  .hero h1 {
+    font-size: clamp(1.15rem, 6.2vw, 1.75rem);
+  }
+
   .thumb-grid,
   .card-grid,
   .solution-list,
@@ -904,8 +1018,14 @@ main:focus {
   }
 
   .carousel-panel,
-  .experience {
+  .experience,
+  .support {
     padding: 22px;
+  }
+
+  .support {
+    margin-top: 20px;
+    margin-bottom: 24px;
   }
 
   .nav-auth .ghost-btn {
@@ -925,6 +1045,12 @@ main:focus {
   .page-hero,
   .auth-card {
     padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: clamp(1rem, 5.6vw, 1.25rem);
   }
 }
 
