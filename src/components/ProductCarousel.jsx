@@ -13,9 +13,19 @@ export default function ProductCarousel() {
     const update = () => setPrefersReducedMotion(media.matches);
 
     update();
-    media.addEventListener('change', update);
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', update);
+    } else {
+      media.addListener(update);
+    }
 
-    return () => media.removeEventListener('change', update);
+    return () => {
+      if (typeof media.removeEventListener === 'function') {
+        media.removeEventListener('change', update);
+      } else {
+        media.removeListener(update);
+      }
+    };
   }, []);
 
   // Auto-play carousel every 6 seconds when motion reduction is disabled.

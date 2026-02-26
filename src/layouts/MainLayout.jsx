@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import RouteEffects from '../components/RouteEffects';
 import SiteFooter from '../components/SiteFooter';
 import useReveal from '../hooks/useReveal';
 
@@ -11,6 +12,8 @@ export default function MainLayout() {
 
   return (
     <div className="app-shell">
+      {/* Handles route-level scroll restore and SEO meta updates. */}
+      <RouteEffects />
       <a href="#main-content" className="skip-link">
         跳到主要内容
       </a>

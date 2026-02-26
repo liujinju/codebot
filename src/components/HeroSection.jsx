@@ -1,23 +1,54 @@
+import { useEffect, useState } from 'react';
 import { media } from '../data/siteData';
 import { Link } from 'react-router-dom';
 
 export default function HeroSection() {
+  const [videoReady, setVideoReady] = useState(false);
+  const [useVideo, setUseVideo] = useState(true);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    // Save-data or reduced-motion users see static hero image for faster perceived load.
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const saveData = Boolean(connection && connection.saveData);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (saveData || reduceMotion) {
+      setUseVideo(false);
+    }
+  }, []);
+
   return (
     // Hero uses remote MP4 as background and keeps key CTAs above fold.
     <section id="hero" className="hero">
-      <video
-        className="hero-video"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
+      <img
+        className="hero-poster"
+        src={media.heroPoster}
+        alt=""
         aria-hidden="true"
-        poster={media.heroPoster}
-        src={media.heroVideo}
-      >
-        你的浏览器不支持视频播放。
-      </video>
+        fetchPriority="high"
+        decoding="async"
+      />
+      {useVideo ? (
+        <video
+          className={`hero-video ${videoReady ? 'is-ready' : ''}`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          poster={media.heroPoster}
+          src={media.heroVideo}
+          onCanPlay={() => setVideoReady(true)}
+          onError={() => setUseVideo(false)}
+        >
+          你的浏览器不支持视频播放。
+        </video>
+      ) : null}
       <div className="hero-overlay" />
 
       <div className="hero-content" data-reveal>

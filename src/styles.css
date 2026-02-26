@@ -221,12 +221,22 @@ main:focus {
   overflow: hidden;
 }
 
+.hero-poster,
 .hero-video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.hero-video {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.hero-video.is-ready {
+  opacity: 1;
 }
 
 .hero-overlay {
@@ -714,6 +724,16 @@ main:focus {
   gap: 10px;
 }
 
+.form-field {
+  display: grid;
+  gap: 6px;
+}
+
+.form-field span {
+  font-size: 0.86rem;
+  color: #c8d8ef;
+}
+
 .auth-form input,
 .auth-form textarea {
   border-radius: 12px;
@@ -729,6 +749,26 @@ main:focus {
   color: #7b8ba3;
 }
 
+.auth-form input:focus-visible,
+.auth-form textarea:focus-visible {
+  border-color: rgba(0, 209, 255, 0.7);
+}
+
+.form-hint {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #7e90ab;
+}
+
+.form-message {
+  margin: 12px 0 0;
+  border: 1px solid rgba(0, 209, 255, 0.32);
+  background: rgba(0, 209, 255, 0.08);
+  color: #baf6ff;
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
 .auth-switch {
   margin-top: 14px;
 }
@@ -736,6 +776,13 @@ main:focus {
 .auth-switch a {
   color: var(--brand);
   margin-left: 8px;
+}
+
+.route-fallback {
+  min-height: 30vh;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
 }
 
 .site-footer {

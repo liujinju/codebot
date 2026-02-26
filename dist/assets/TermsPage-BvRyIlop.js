@@ -1,0 +1,1 @@
+import{j as e}from"./index-Cm10H3I7.js";function a(){return e.jsx("section",{className:"page-shell",children:e.jsxs("article",{className:"detail-block","data-reveal":!0,children:[e.jsx("p",{className:"eyebrow",children:"Policy"}),e.jsx("h1",{children:"服务条款"}),e.jsx("p",{children:"使用平台前请阅读服务条款，涵盖账号规范、许可范围、服务可用性与责任边界说明。"})]})})}export{a as default};
