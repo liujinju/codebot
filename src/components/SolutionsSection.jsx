@@ -1,5 +1,6 @@
 import SectionHeader from './SectionHeader';
 import { solutions } from '../data/siteData';
+import { Link } from 'react-router-dom';
 
 export default function SolutionsSection() {
   return (
@@ -13,10 +14,10 @@ export default function SolutionsSection() {
       {/* Scenario cards split solution value by industry verticals. */}
       <div className="solution-list" data-reveal>
         {solutions.map((item) => (
-          <article key={item.name} className="solution-item">
+          <article key={item.slug} className="solution-item">
             <h3>{item.name}</h3>
             <p>{item.detail}</p>
-            <a href="#">查看方案</a>
+            <Link to={`/solutions/${item.slug}`}>查看方案</Link>
           </article>
         ))}
       </div>

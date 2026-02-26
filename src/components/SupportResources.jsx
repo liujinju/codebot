@@ -1,5 +1,6 @@
 import SectionHeader from './SectionHeader';
 import { supportLinks } from '../data/siteData';
+import { Link } from 'react-router-dom';
 
 export default function SupportResources() {
   return (
@@ -13,11 +14,11 @@ export default function SupportResources() {
       {/* Support entry points for docs, FAQ and community help. */}
       <div className="support-grid" data-reveal>
         {supportLinks.map((item) => (
-          <a key={item.title} className="support-card" href={item.href}>
+          <Link key={item.title} className="support-card" to={item.href}>
             <h3>{item.title}</h3>
             <p>{item.desc}</p>
             <span>立即访问 →</span>
-          </a>
+          </Link>
         ))}
       </div>
     </section>

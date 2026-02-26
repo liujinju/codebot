@@ -1,9 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { navItems } from '../data/siteData';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname, location.search]);
 
   useEffect(() => {
     const onEscape = (event) => {
@@ -31,9 +37,9 @@ export default function Navbar() {
     // Sticky top navigation with desktop and mobile menu states.
     <header className="top-nav" ref={menuRef}>
       <div className="nav-inner">
-        <a className="logo" href="#hero" aria-label="Embodied Intelligence Home">
+        <Link className="logo" to="/" aria-label="Embodied Intelligence Home">
           EI<span>•OS</span>
-        </a>
+        </Link>
 
         <button
           className="menu-toggle"
@@ -47,19 +53,24 @@ export default function Navbar() {
 
         <nav id="primary-navigation" className={`nav-links ${open ? 'open' : ''}`}>
           {navItems.map((item) => (
-            <a key={item.label} href={item.href} onClick={() => setOpen(false)}>
+            <NavLink
+              key={item.label}
+              to={item.to}
+              className={({ isActive }) => (isActive ? 'active' : '')}
+              onClick={() => setOpen(false)}
+            >
               {item.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
         <div className="nav-auth">
-          <a href="#" className="ghost-btn">
+          <Link to="/auth/login" className="ghost-btn">
             登录
-          </a>
-          <a href="#" className="solid-btn">
+          </Link>
+          <Link to="/auth/register" className="solid-btn">
             注册
-          </a>
+          </Link>
         </div>
       </div>
     </header>

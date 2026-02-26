@@ -1,4 +1,5 @@
 import { media } from '../data/siteData';
+import { Link } from 'react-router-dom';
 
 export default function ExperienceDownload() {
   return (
@@ -9,15 +10,15 @@ export default function ExperienceDownload() {
         <h2>立即体验具身智能平台</h2>
         <p>下载 SDK、获取开发白皮书，或加入开发者社区开启协作。</p>
         <div className="hero-actions">
-          <a href="#" className="solid-btn lg">
+          <Link to="/developers" className="solid-btn lg">
             下载 SDK
-          </a>
-          <a href="#" className="ghost-btn lg">
+          </Link>
+          <Link to="/support?tab=docs" className="ghost-btn lg">
             获取白皮书
-          </a>
-          <a href="#" className="ghost-btn lg">
+          </Link>
+          <Link to="/support?tab=forum" className="ghost-btn lg">
             进入社区
-          </a>
+          </Link>
         </div>
       </div>
 

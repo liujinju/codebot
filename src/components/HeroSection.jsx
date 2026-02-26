@@ -1,4 +1,5 @@
 import { media } from '../data/siteData';
+import { Link } from 'react-router-dom';
 
 export default function HeroSection() {
   return (
@@ -26,12 +27,12 @@ export default function HeroSection() {
           面向企业客户、开发者和消费者的一体化具身智能平台，融合感知、控制、决策和开发生态。
         </p>
         <div className="hero-actions">
-          <a href="#products" className="solid-btn lg">
+          <Link to="/products" className="solid-btn lg">
             探索产品
-          </a>
-          <a href="#developers" className="ghost-btn lg">
+          </Link>
+          <Link to="/developers" className="ghost-btn lg">
             获取 SDK
-          </a>
+          </Link>
         </div>
       </div>
     </section>

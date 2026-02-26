@@ -12,12 +12,12 @@ export const media = {
 };
 
 export const navItems = [
-  { label: '产品', href: '#products' },
-  { label: '解决方案', href: '#solutions' },
-  { label: '开发者', href: '#developers' },
-  { label: '案例', href: '#cases' },
-  { label: '支持', href: '#support' },
-  { label: '关于我们', href: '#about' },
+  { label: '产品', to: '/products' },
+  { label: '解决方案', to: '/solutions' },
+  { label: '开发者', to: '/developers' },
+  { label: '案例', to: '/cases' },
+  { label: '支持', to: '/support' },
+  { label: '关于我们', to: '/about' },
 ];
 
 export const productSlides = [
@@ -72,18 +72,22 @@ export const capabilityCards = [
 
 export const solutions = [
   {
+    slug: 'manufacturing',
     name: '智能制造',
     detail: '柔性装配、质检巡检、物料搬运全流程智能化升级。',
   },
   {
+    slug: 'logistics',
     name: '智慧物流',
     detail: '仓储拣选、末端配送、异常处理场景的协同机器人集群。',
   },
   {
+    slug: 'retail-service',
     name: '商业服务',
     detail: '展厅接待、导览讲解、零售辅助和沉浸式互动运营。',
   },
   {
+    slug: 'home-education',
     name: '家庭与教育',
     detail: '家庭陪伴、学习辅导、儿童编程与 STEM 实践平台。',
   },
@@ -123,8 +127,28 @@ export const cases = [
 ];
 
 export const supportLinks = [
-  { title: '开发文档', href: '#', desc: 'API 参考、接入指南与最佳实践。' },
-  { title: 'FAQ', href: '#', desc: '常见部署、调试与许可证问题说明。' },
-  { title: '开发者论坛', href: '#', desc: '问题讨论、示例共享、官方技术答疑。' },
-  { title: '状态与公告', href: '#', desc: '平台状态、更新日志、安全公告。' },
+  {
+    tab: 'docs',
+    title: '开发文档',
+    href: '/support?tab=docs',
+    desc: 'API 参考、接入指南与最佳实践。',
+  },
+  {
+    tab: 'faq',
+    title: 'FAQ',
+    href: '/support?tab=faq',
+    desc: '常见部署、调试与许可证问题说明。',
+  },
+  {
+    tab: 'forum',
+    title: '开发者论坛',
+    href: '/support?tab=forum',
+    desc: '问题讨论、示例共享、官方技术答疑。',
+  },
+  {
+    tab: 'status',
+    title: '状态与公告',
+    href: '/support?tab=status',
+    desc: '平台状态、更新日志、安全公告。',
+  },
 ];

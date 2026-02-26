@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
 
-export default function useReveal() {
+export default function useReveal(trigger) {
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
     const targets = document.querySelectorAll('[data-reveal]');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -26,5 +30,5 @@ export default function useReveal() {
     targets.forEach((node) => observer.observe(node));
 
     return () => observer.disconnect();
-  }, []);
+  }, [trigger]);
 }
