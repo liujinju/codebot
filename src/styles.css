@@ -892,6 +892,56 @@ main:focus {
   color: var(--text-muted);
 }
 
+.floating-contact {
+  position: fixed;
+  right: 24px;
+  bottom: 26px;
+  z-index: 26;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 64px;
+  min-height: 138px;
+  border-radius: 999px;
+  padding: 12px 8px;
+  border: 1px solid rgba(102, 227, 255, 0.56);
+  color: #dff6ff;
+  background: linear-gradient(160deg, rgba(12, 35, 62, 0.58), rgba(7, 18, 34, 0.7));
+  backdrop-filter: blur(10px) saturate(1.3);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 14px 28px rgba(0, 114, 255, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+}
+
+.floating-contact:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 34px rgba(0, 114, 255, 0.28);
+  filter: brightness(1.03);
+}
+
+.floating-contact-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(133, 231, 255, 0.2);
+}
+
+.floating-contact-label {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  white-space: nowrap;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+}
+
 .site-footer {
   border-top: 1px solid var(--line);
   padding: 44px 20px 32px;
@@ -1045,6 +1095,25 @@ main:focus {
   .page-hero,
   .auth-card {
     padding: 18px;
+  }
+
+  .floating-contact {
+    right: 14px;
+    bottom: 16px;
+    width: 56px;
+    min-height: 120px;
+    padding: 10px 7px;
+    font-size: 0.68rem;
+  }
+
+  .floating-contact-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .floating-contact-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
   }
 }
 

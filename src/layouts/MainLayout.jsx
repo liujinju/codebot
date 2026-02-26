@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import RouteEffects from '../components/RouteEffects';
 import SiteFooter from '../components/SiteFooter';
+import FloatingContact from '../components/FloatingContact';
 import useReveal from '../hooks/useReveal';
 import { useLocale } from '../contexts/LocaleContext';
 
@@ -23,6 +24,7 @@ export default function MainLayout() {
       <main id="main-content" tabIndex="-1">
         <Outlet />
       </main>
+      <FloatingContact />
       <SiteFooter />
     </div>
   );
